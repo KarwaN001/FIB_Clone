@@ -17,7 +17,7 @@ class BottomNavigation: UITabBarController {
     
     private func setupTabBar() {
         tabBar.backgroundColor = .systemBackground
-        tabBar.tintColor = .systemBlue
+        tabBar.tintColor = UIColor(red: 0.8, green: 0.2, blue: 0.2, alpha: 1.0)
         tabBar.unselectedItemTintColor = .systemGray
         
         tabBar.layer.borderWidth = 0.5
