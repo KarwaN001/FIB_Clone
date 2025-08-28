@@ -128,8 +128,8 @@ class AccountViewController: UIViewController {
         // Create gradient layer
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [
-            UIColor(red: 0.4, green: 0.8, blue: 0.6, alpha: 1.0).cgColor,
-            UIColor(red: 0.3, green: 0.7, blue: 0.5, alpha: 1.0).cgColor
+            UIColor(red: 1.0, green: 0.6, blue: 0.6, alpha: 1.0).cgColor,
+            UIColor(red: 0.8, green: 0.2, blue: 0.2, alpha: 1.0).cgColor
         ]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x: 1, y: 1)
@@ -164,7 +164,7 @@ class AccountViewController: UIViewController {
         
         // Dropdown arrow
         let dropdownArrow = UIImageView()
-        dropdownArrow.image = UIImage(systemName: "line.3.horizontal")
+        dropdownArrow.image = UIImage(systemName: "slider.horizontal.3")
         dropdownArrow.tintColor = .white
         dropdownArrow.backgroundColor = UIColor.white.withAlphaComponent(0.2)
         dropdownArrow.layer.cornerRadius = 25
