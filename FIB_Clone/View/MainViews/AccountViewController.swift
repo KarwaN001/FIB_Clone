@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class AccountViewController: UIViewController {
     override func viewDidLoad() {
@@ -15,7 +16,6 @@ class AccountViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .systemBackground
-        title = "Account"
         
         let label = UILabel()
         label.text = "Account Screen"
@@ -30,5 +30,22 @@ class AccountViewController: UIViewController {
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+}
+
+struct AccountViewControllerRepresentable: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> AccountViewController {
+        return AccountViewController()
+    }
+    
+    func updateUIViewController(_ uiViewController: AccountViewController, context: Context) {
+        
+    }
+}
+
+struct AccountViewController_Previews: PreviewProvider {
+    static var previews: some View {
+        AccountViewControllerRepresentable()
+            .edgesIgnoringSafeArea(.all)
     }
 } 
