@@ -58,8 +58,6 @@ class AccountViewController: UIViewController {
         
         // User icon
         let userIconView = UIView()
-        userIconView.backgroundColor = UIColor.systemGray4
-        userIconView.layer.cornerRadius = 20
         userIconView.translatesAutoresizingMaskIntoConstraints = false
         
         let userIcon = UIImageView()
@@ -78,8 +76,6 @@ class AccountViewController: UIViewController {
         
         // Notification icon
         let notificationIconView = UIView()
-        notificationIconView.backgroundColor = UIColor.systemGray4
-        notificationIconView.layer.cornerRadius = 20
         notificationIconView.translatesAutoresizingMaskIntoConstraints = false
         
         let notificationIcon = UIImageView()
@@ -99,23 +95,23 @@ class AccountViewController: UIViewController {
             headerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             headerView.heightAnchor.constraint(equalToConstant: 60),
             
-            userIconView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 20),
+            userIconView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 10),
             userIconView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-            userIconView.widthAnchor.constraint(equalToConstant: 40),
-            userIconView.heightAnchor.constraint(equalToConstant: 40),
+            userIconView.widthAnchor.constraint(equalToConstant: 70),
+            userIconView.heightAnchor.constraint(equalToConstant: 70),
             
             userIcon.centerXAnchor.constraint(equalTo: userIconView.centerXAnchor),
             userIcon.centerYAnchor.constraint(equalTo: userIconView.centerYAnchor),
             userIcon.widthAnchor.constraint(equalToConstant: 20),
             userIcon.heightAnchor.constraint(equalToConstant: 20),
             
-            nameLabel.leadingAnchor.constraint(equalTo: userIconView.trailingAnchor, constant: 12),
+            nameLabel.leadingAnchor.constraint(equalTo: userIconView.trailingAnchor, constant: 8),
             nameLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
             
-            notificationIconView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -20),
+            notificationIconView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -10),
             notificationIconView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-            notificationIconView.widthAnchor.constraint(equalToConstant: 40),
-            notificationIconView.heightAnchor.constraint(equalToConstant: 40),
+            notificationIconView.widthAnchor.constraint(equalToConstant: 70),
+            notificationIconView.heightAnchor.constraint(equalToConstant: 70),
             
             notificationIcon.centerXAnchor.constraint(equalTo: notificationIconView.centerXAnchor),
             notificationIcon.centerYAnchor.constraint(equalTo: notificationIconView.centerYAnchor),
@@ -253,28 +249,29 @@ class AccountViewController: UIViewController {
         actionsContainerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(actionsContainerView)
         
-        // First row of actions
-        let firstRowStackView = createActionRowStackView()
-        firstRowStackView.addArrangedSubview(createActionButton(icon: "paperplane.fill", title: "Send"))
-        firstRowStackView.addArrangedSubview(createActionButton(icon: "plus.circle.fill", title: "Deposit"))
-        firstRowStackView.addArrangedSubview(createActionButton(icon: "minus.circle.fill", title: "Withdraw"))
-        firstRowStackView.addArrangedSubview(createActionButton(icon: "arrow.triangle.2.circlepath", title: "Convert"))
+        // Get action items from model
+        let actionRows = ActionItemsData.shared.getActionItemsInRows()
+        var rowStackViews: [UIStackView] = []
         
-        // Second row of actions
-        let secondRowStackView = createActionRowStackView()
-        secondRowStackView.addArrangedSubview(createActionButton(icon: "lock.fill", title: "Safe box"))
-        secondRowStackView.addArrangedSubview(createActionButton(icon: "gauge.high", title: "Account limit"))
-        secondRowStackView.addArrangedSubview(createActionButton(icon: "location.fill", title: "Around me"))
-        secondRowStackView.addArrangedSubview(createActionButton(icon: "calendar.badge.clock", title: "Installment"))
+        // Create rows dynamically
+        for row in actionRows {
+            let rowStackView = createActionRowStackView()
+            
+            // Add action buttons for each item in the row
+            for item in row {
+                rowStackView.addArrangedSubview(createActionButton(icon: item.icon, title: item.title))
+            }
+            
+            // Fill remaining spaces with empty views if row has less than 4 items
+            let remainingSpaces = 4 - row.count
+            for _ in 0..<remainingSpaces {
+                rowStackView.addArrangedSubview(UIView()) // Empty spacer
+            }
+            
+            rowStackViews.append(rowStackView)
+        }
         
-        // Third row - Hot Deals
-        let thirdRowStackView = createActionRowStackView()
-        thirdRowStackView.addArrangedSubview(createActionButton(icon: "tag.fill", title: "Hot Deals"))
-        thirdRowStackView.addArrangedSubview(UIView()) // Empty spacer
-        thirdRowStackView.addArrangedSubview(UIView()) // Empty spacer
-        thirdRowStackView.addArrangedSubview(UIView()) // Empty spacer
-        
-        let mainStackView = UIStackView(arrangedSubviews: [firstRowStackView, secondRowStackView, thirdRowStackView])
+        let mainStackView = UIStackView(arrangedSubviews: rowStackViews)
         mainStackView.axis = .vertical
         mainStackView.distribution = .fillEqually
         mainStackView.spacing = 20

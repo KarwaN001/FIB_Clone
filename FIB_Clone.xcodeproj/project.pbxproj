@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C92874C2E6108E900860481 /* ActionItemsDataVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C92874B2E6108E900860481 /* ActionItemsDataVM.swift */; };
 		9C9B58FD2E60AAE4002F515E /* FIB_CloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B58FC2E60AAE4002F515E /* FIB_CloneApp.swift */; };
 		9C9B58FF2E60AAE4002F515E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B58FE2E60AAE4002F515E /* ContentView.swift */; };
 		9C9B59012E60AAE6002F515E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C9B59002E60AAE6002F515E /* Assets.xcassets */; };
@@ -17,9 +18,11 @@
 		9C9B59102E60AC03002F515E /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B59112E60AC03002F515E /* ScanViewController.swift */; };
 		9C9B59122E60AC04002F515E /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B59132E60AC04002F515E /* SupportViewController.swift */; };
 		9C9B59142E60AC05002F515E /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B59152E60AC05002F515E /* MenuViewController.swift */; };
+		9C9B59162E60AC06002F515E /* ActionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B59172E60AC06002F515E /* ActionItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9C92874B2E6108E900860481 /* ActionItemsDataVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionItemsDataVM.swift; sourceTree = "<group>"; };
 		9C9B58F92E60AAE4002F515E /* FIB_Clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FIB_Clone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C9B58FC2E60AAE4002F515E /* FIB_CloneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIB_CloneApp.swift; sourceTree = "<group>"; };
 		9C9B58FE2E60AAE4002F515E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -31,6 +34,7 @@
 		9C9B59112E60AC03002F515E /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		9C9B59132E60AC04002F515E /* SupportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
 		9C9B59152E60AC05002F515E /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		9C9B59172E60AC06002F515E /* ActionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,7 @@
 		9C9287492E60E6F100860481 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9C9B59172E60AC06002F515E /* ActionItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -76,6 +81,7 @@
 		9C92874A2E60E6F900860481 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				9C92874B2E6108E900860481 /* ActionItemsDataVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -194,7 +200,9 @@
 				9C9B590E2E60AC02002F515E /* CardsViewController.swift in Sources */,
 				9C9B59102E60AC03002F515E /* ScanViewController.swift in Sources */,
 				9C9B59122E60AC04002F515E /* SupportViewController.swift in Sources */,
+				9C92874C2E6108E900860481 /* ActionItemsDataVM.swift in Sources */,
 				9C9B59142E60AC05002F515E /* MenuViewController.swift in Sources */,
+				9C9B59162E60AC06002F515E /* ActionItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
