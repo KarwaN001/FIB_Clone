@@ -12,6 +12,11 @@
 		9C9B59012E60AAE6002F515E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C9B59002E60AAE6002F515E /* Assets.xcassets */; };
 		9C9B59042E60AAE6002F515E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C9B59032E60AAE6002F515E /* Preview Assets.xcassets */; };
 		9C9B590B2E60AB79002F515E /* BottomNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B590A2E60AB79002F515E /* BottomNavigation.swift */; };
+		9C9B590C2E60AC01002F515E /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B590D2E60AC01002F515E /* AccountViewController.swift */; };
+		9C9B590E2E60AC02002F515E /* CardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B590F2E60AC02002F515E /* CardsViewController.swift */; };
+		9C9B59102E60AC03002F515E /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B59112E60AC03002F515E /* ScanViewController.swift */; };
+		9C9B59122E60AC04002F515E /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B59132E60AC04002F515E /* SupportViewController.swift */; };
+		9C9B59142E60AC05002F515E /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B59152E60AC05002F515E /* MenuViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +26,11 @@
 		9C9B59002E60AAE6002F515E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C9B59032E60AAE6002F515E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9C9B590A2E60AB79002F515E /* BottomNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavigation.swift; sourceTree = "<group>"; };
+		9C9B590D2E60AC01002F515E /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		9C9B590F2E60AC02002F515E /* CardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewController.swift; sourceTree = "<group>"; };
+		9C9B59112E60AC03002F515E /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		9C9B59132E60AC04002F515E /* SupportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
+		9C9B59152E60AC05002F515E /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,10 +47,23 @@
 		9C9287472E60E6B400860481 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9C9287482E60E7A100860481 /* MainViews */,
 				9C9B590A2E60AB79002F515E /* BottomNavigation.swift */,
 				9C9B58FE2E60AAE4002F515E /* ContentView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		9C9287482E60E7A100860481 /* MainViews */ = {
+			isa = PBXGroup;
+			children = (
+				9C9B590D2E60AC01002F515E /* AccountViewController.swift */,
+				9C9B590F2E60AC02002F515E /* CardsViewController.swift */,
+				9C9B59112E60AC03002F515E /* ScanViewController.swift */,
+				9C9B59132E60AC04002F515E /* SupportViewController.swift */,
+				9C9B59152E60AC05002F515E /* MenuViewController.swift */,
+			);
+			path = MainViews;
 			sourceTree = "<group>";
 		};
 		9C9287492E60E6F100860481 /* Model */ = {
@@ -167,6 +190,11 @@
 				9C9B58FF2E60AAE4002F515E /* ContentView.swift in Sources */,
 				9C9B58FD2E60AAE4002F515E /* FIB_CloneApp.swift in Sources */,
 				9C9B590B2E60AB79002F515E /* BottomNavigation.swift in Sources */,
+				9C9B590C2E60AC01002F515E /* AccountViewController.swift in Sources */,
+				9C9B590E2E60AC02002F515E /* CardsViewController.swift in Sources */,
+				9C9B59102E60AC03002F515E /* ScanViewController.swift in Sources */,
+				9C9B59122E60AC04002F515E /* SupportViewController.swift in Sources */,
+				9C9B59142E60AC05002F515E /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
