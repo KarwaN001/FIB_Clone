@@ -25,42 +25,42 @@ class BottomNavigation: UITabBarController {
     }
     
     private func setupViewControllers() {
-        let homeVC = createTabViewController(
-            title: "Home",
-            imageName: "house",
-            selectedImageName: "house.fill",
-            viewController: HomeViewController()
+        let accountVC = createTabViewController(
+            title: "Account",
+            imageName: "building.columns",
+            selectedImageName: "building.columns.fill",
+            viewController: AccountViewController()
         )
         
-        let accountsVC = createTabViewController(
-            title: "Accounts",
+        let cardsVC = createTabViewController(
+            title: "Cards",
             imageName: "creditcard",
             selectedImageName: "creditcard.fill",
-            viewController: AccountsViewController()
+            viewController: CardsViewController()
         )
         
-        let transferVC = createTabViewController(
-            title: "Transfer",
-            imageName: "arrow.left.arrow.right",
-            selectedImageName: "arrow.left.arrow.right.circle.fill",
-            viewController: TransferViewController()
+        let scanVC = createTabViewController(
+            title: "Scan",
+            imageName: "qrcode.viewfinder",
+            selectedImageName: "qrcode.viewfinder",
+            viewController: ScanViewController()
         )
         
-        let paymentsVC = createTabViewController(
-            title: "Payments",
-            imageName: "banknote",
-            selectedImageName: "banknote.fill",
-            viewController: PaymentsViewController()
+        let supportVC = createTabViewController(
+            title: "Support",
+            imageName: "questionmark.circle",
+            selectedImageName: "questionmark.circle.fill",
+            viewController: SupportViewController()
         )
         
-        let moreVC = createTabViewController(
-            title: "More",
-            imageName: "ellipsis",
-            selectedImageName: "ellipsis.circle.fill",
-            viewController: MoreViewController()
+        let menuVC = createTabViewController(
+            title: "Menu",
+            imageName: "square.grid.2x2",
+            selectedImageName: "square.grid.2x2.fill",
+            viewController: MenuViewController()
         )
         
-        viewControllers = [homeVC, accountsVC, transferVC, paymentsVC, moreVC]
+        viewControllers = [accountVC, cardsVC, scanVC, supportVC, menuVC]
     }
     
     private func createTabViewController(title: String, imageName: String, selectedImageName: String, viewController: UIViewController) -> UINavigationController {
@@ -76,7 +76,7 @@ class BottomNavigation: UITabBarController {
 
 // MARK: - Tab View Controllers
 
-class HomeViewController: UIViewController {
+class AccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -84,10 +84,10 @@ class HomeViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .systemBackground
-        title = "Home"
+        title = "Account"
         
         let label = UILabel()
-        label.text = "Home Screen"
+        label.text = "Account Screen"
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.textAlignment = .center
         label.textColor = .label
@@ -102,7 +102,7 @@ class HomeViewController: UIViewController {
     }
 }
 
-class AccountsViewController: UIViewController {
+class CardsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -110,10 +110,10 @@ class AccountsViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .systemBackground
-        title = "Accounts"
+        title = "Cards"
         
         let label = UILabel()
-        label.text = "Accounts Screen"
+        label.text = "Cards Screen"
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.textAlignment = .center
         label.textColor = .label
@@ -128,7 +128,7 @@ class AccountsViewController: UIViewController {
     }
 }
 
-class TransferViewController: UIViewController {
+class ScanViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -136,10 +136,10 @@ class TransferViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .systemBackground
-        title = "Transfer"
+        title = "Scan"
         
         let label = UILabel()
-        label.text = "Transfer Screen"
+        label.text = "Scan Screen"
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.textAlignment = .center
         label.textColor = .label
@@ -154,7 +154,7 @@ class TransferViewController: UIViewController {
     }
 }
 
-class PaymentsViewController: UIViewController {
+class SupportViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -162,10 +162,10 @@ class PaymentsViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .systemBackground
-        title = "Payments"
+        title = "Support"
         
         let label = UILabel()
-        label.text = "Payments Screen"
+        label.text = "Support Screen"
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.textAlignment = .center
         label.textColor = .label
@@ -180,7 +180,7 @@ class PaymentsViewController: UIViewController {
     }
 }
 
-class MoreViewController: UIViewController {
+class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -188,10 +188,10 @@ class MoreViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .systemBackground
-        title = "More"
+        title = "Menu"
         
         let label = UILabel()
-        label.text = "More Screen"
+        label.text = "Menu Screen"
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.textAlignment = .center
         label.textColor = .label
