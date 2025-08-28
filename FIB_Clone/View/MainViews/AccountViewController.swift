@@ -168,7 +168,7 @@ class AccountViewController: UIViewController {
         
         // Dropdown arrow
         let dropdownArrow = UIImageView()
-        dropdownArrow.image = UIImage(systemName: "chevron.down")
+        dropdownArrow.image = UIImage(systemName: "line.3.horizontal")
         dropdownArrow.tintColor = .white
         dropdownArrow.backgroundColor = UIColor.white.withAlphaComponent(0.2)
         dropdownArrow.layer.cornerRadius = 25
@@ -305,8 +305,10 @@ class AccountViewController: UIViewController {
         return stackView
     }
     
-    private func createActionButton(icon: String, title: String) -> UIView {
+        private func createActionButton(icon: String, title: String) -> UIView {
         let containerView = UIView()
+
+//        test test test test
 //        containerView.backgroundColor = UIColor.systemGray6
 //        containerView.layer.cornerRadius = 32
 //        containerView.layer.shadowColor = UIColor.black.cgColor
@@ -314,10 +316,16 @@ class AccountViewController: UIViewController {
 //        containerView.layer.shadowRadius = 4
 //        containerView.layer.shadowOpacity = 0.1
 //        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Icon container with circular background
+        let iconContainerView = UIView()
+        iconContainerView.backgroundColor = UIColor.systemGray6
+        iconContainerView.layer.cornerRadius = 25 // Half of width/height to make it circular
+        iconContainerView.translatesAutoresizingMaskIntoConstraints = false
         
         let iconImageView = UIImageView()
         iconImageView.image = UIImage(systemName: icon)
-        iconImageView.backgroundColor = UIColor.systemGray6
         iconImageView.tintColor = .black
         iconImageView.contentMode = .scaleAspectFit
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -329,19 +337,31 @@ class AccountViewController: UIViewController {
         titleLabel.textAlignment = .center
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        containerView.addSubview(iconImageView)
+        // Add icon to its container
+        iconContainerView.addSubview(iconImageView)
+        
+        // Add both containers to main container
+        containerView.addSubview(iconContainerView)
         containerView.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
             containerView.heightAnchor.constraint(equalToConstant: 80),
             
-            iconImageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            iconImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 16),
+            // Icon container constraints (circular background)
+            iconContainerView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            iconContainerView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
+            iconContainerView.widthAnchor.constraint(equalToConstant: 50),
+            iconContainerView.heightAnchor.constraint(equalToConstant: 50),
+            
+            // Icon image constraints (centered within circular container)
+            iconImageView.centerXAnchor.constraint(equalTo: iconContainerView.centerXAnchor),
+            iconImageView.centerYAnchor.constraint(equalTo: iconContainerView.centerYAnchor),
             iconImageView.widthAnchor.constraint(equalToConstant: 24),
             iconImageView.heightAnchor.constraint(equalToConstant: 24),
             
+            // Title label constraints
             titleLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 8),
+            titleLabel.topAnchor.constraint(equalTo: iconContainerView.bottomAnchor, constant: 4),
             titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: containerView.leadingAnchor, constant: 4),
             titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: containerView.trailingAnchor, constant: -4)
         ])
