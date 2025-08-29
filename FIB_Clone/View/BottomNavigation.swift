@@ -20,8 +20,9 @@ class BottomNavigation: UITabBarController {
         tabBar.tintColor = UIColor(red: 0.8, green: 0.2, blue: 0.2, alpha: 1.0)
         tabBar.unselectedItemTintColor = .systemGray
         
-        tabBar.layer.borderWidth = 0.5
-        tabBar.layer.borderColor = UIColor.systemGray4.cgColor
+        // Remove border line
+        tabBar.layer.borderWidth = 0
+        tabBar.layer.borderColor = UIColor.clear.cgColor
     }
     
     private func setupViewControllers() {
