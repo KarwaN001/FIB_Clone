@@ -9,6 +9,10 @@ import UIKit
 import SwiftUI
 
 class MenuViewController: UIViewController {
+    
+    // MARK: - UI Components
+    private let headerView = HeaderView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -16,20 +20,19 @@ class MenuViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .systemBackground
-        title = "Menu"
         
-        let label = UILabel()
-        label.text = "Menu Screen"
-        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        label.textAlignment = .center
-        label.textColor = .label
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(label)
+        setupHeader()
+    }
+    
+    private func setupHeader() {
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(headerView)
         
         NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            headerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            headerView.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
 } 
