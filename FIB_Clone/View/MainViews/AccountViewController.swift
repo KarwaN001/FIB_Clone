@@ -26,7 +26,6 @@ class AccountViewController: UIViewController {
         //view.backgroundColor = UIColor.systemGray6
         
         setupScrollView()
-        setupHeaderActions()
         setupBalanceCard()
         setupActionButtons()
     }
@@ -59,19 +58,6 @@ class AccountViewController: UIViewController {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
-    }
-    
-    private func setupHeaderActions() {
-        // Set up header action callbacks
-        headerView.onUserIconTapped = { [weak self] in
-            // Handle user icon tap
-            print("User icon tapped")
-        }
-        
-        headerView.onNotificationTapped = { [weak self] in
-            // Handle notification icon tap
-            print("Notification icon tapped")
-        }
     }
     
     private func setupBalanceCard() {
