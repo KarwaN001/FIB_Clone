@@ -11,9 +11,6 @@ import SwiftUI
 class ScanViewController: UIViewController {
     
     // MARK: - UI Components
-    private let scrollView = UIScrollView()
-    private let contentView = UIView()
-    private let backButton = UIButton()
     private let titleLabel = UILabel()
     private let cameraView = UIView()
     private let scanLineView = UIView()
@@ -29,7 +26,6 @@ class ScanViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .systemGray6
         
-        setupScrollView()
         setupHeader()
         setupCameraView()
         setupInstructionText()
@@ -37,51 +33,18 @@ class ScanViewController: UIViewController {
         setupEnterManuallyButton()
     }
     
-    private func setupScrollView() {
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        
-        NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
-        ])
-    }
-    
     private func setupHeader() {
-        // Back button
-        backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-        backButton.tintColor = .label
-        backButton.translatesAutoresizingMaskIntoConstraints = false
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        
         // Title
         titleLabel.text = "Scan QR Code"
         titleLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
         titleLabel.textColor = .label
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        contentView.addSubview(backButton)
-        contentView.addSubview(titleLabel)
+        view.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            backButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            backButton.widthAnchor.constraint(equalToConstant: 30),
-            backButton.heightAnchor.constraint(equalToConstant: 30),
-            
-            titleLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20)
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
         ])
     }
     
@@ -95,12 +58,12 @@ class ScanViewController: UIViewController {
         scanLineView.translatesAutoresizingMaskIntoConstraints = false
         
         cameraView.addSubview(scanLineView)
-        contentView.addSubview(cameraView)
+        view.addSubview(cameraView)
         
         NSLayoutConstraint.activate([
             cameraView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
-            cameraView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            cameraView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            cameraView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            cameraView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             cameraView.heightAnchor.constraint(equalTo: cameraView.widthAnchor),
             
             scanLineView.centerXAnchor.constraint(equalTo: cameraView.centerXAnchor),
@@ -124,12 +87,12 @@ class ScanViewController: UIViewController {
         instructionLabel.layer.masksToBounds = true
         instructionLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        contentView.addSubview(instructionLabel)
+        view.addSubview(instructionLabel)
         
         NSLayoutConstraint.activate([
             instructionLabel.topAnchor.constraint(equalTo: cameraView.bottomAnchor, constant: 30),
-            instructionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            instructionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            instructionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            instructionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             instructionLabel.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
@@ -141,11 +104,11 @@ class ScanViewController: UIViewController {
         notWorkingLabel.textAlignment = .center
         notWorkingLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        contentView.addSubview(notWorkingLabel)
+        view.addSubview(notWorkingLabel)
         
         NSLayoutConstraint.activate([
             notWorkingLabel.topAnchor.constraint(equalTo: instructionLabel.bottomAnchor, constant: 60),
-            notWorkingLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+            notWorkingLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
     
@@ -158,16 +121,13 @@ class ScanViewController: UIViewController {
         enterManuallyButton.translatesAutoresizingMaskIntoConstraints = false
         enterManuallyButton.addTarget(self, action: #selector(enterManuallyTapped), for: .touchUpInside)
         
-        contentView.addSubview(enterManuallyButton)
+        view.addSubview(enterManuallyButton)
         
         NSLayoutConstraint.activate([
             enterManuallyButton.topAnchor.constraint(equalTo: notWorkingLabel.bottomAnchor, constant: 10),
-            enterManuallyButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            enterManuallyButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            enterManuallyButton.heightAnchor.constraint(equalToConstant: 50),
-            
-            // Set content height
-            contentView.bottomAnchor.constraint(equalTo: enterManuallyButton.bottomAnchor, constant: 50)
+            enterManuallyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            enterManuallyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            enterManuallyButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
@@ -176,11 +136,6 @@ class ScanViewController: UIViewController {
         UIView.animate(withDuration: 0.5, delay: 0, options: [.repeat, .autoreverse], animations: {
             self.scanLineView.alpha = 0.0
         })
-    }
-    
-    @objc private func backButtonTapped() {
-        // Handle back button tap
-        navigationController?.popViewController(animated: true)
     }
     
     @objc private func enterManuallyTapped() {
