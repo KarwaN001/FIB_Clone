@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SupportViewController: UIViewController {
     override func viewDidLoad() {
@@ -14,21 +15,25 @@ class SupportViewController: UIViewController {
     }
     
     private func setupView() {
-        view.backgroundColor = .systemBackground
-        title = "Support"
-        
-        let label = UILabel()
-        label.text = "Support Screen"
-        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        label.textAlignment = .center
-        label.textColor = .label
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(label)
-        
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
+       
     }
-} 
+}
+
+// MARK: - SwiftUI Preview
+
+struct SupportViewControllerRepresentable: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> SupportViewController {
+        return SupportViewController()
+    }
+    
+    func updateUIViewController(_ uiViewController: SupportViewController, context: Context) {
+        
+    }
+}
+
+struct SupportViewController_Previews: PreviewProvider {
+    static var previews: some View {
+        SupportViewControllerRepresentable()
+            .edgesIgnoringSafeArea(.all)
+    }
+}
