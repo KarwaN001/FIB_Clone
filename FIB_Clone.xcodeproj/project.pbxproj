@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9C87377A2E61FC9D0062D561 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C8737792E61FC9D0062D561 /* logo.png */; };
 		9C92874C2E6108E900860481 /* ActionItemsDataVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C92874B2E6108E900860481 /* ActionItemsDataVM.swift */; };
 		9C92874D2E6109A100860481 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C92874E2E6109A100860481 /* Card.swift */; };
 		9C92874F2E6109B200860481 /* CardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9287502E6109B200860481 /* CardsViewModel.swift */; };
@@ -25,7 +24,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9C8737792E61FC9D0062D561 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = ../../../logo.png; sourceTree = "<group>"; };
 		9C92874B2E6108E900860481 /* ActionItemsDataVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionItemsDataVM.swift; sourceTree = "<group>"; };
 		9C92874E2E6109A100860481 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		9C9287502E6109B200860481 /* CardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewModel.swift; sourceTree = "<group>"; };
@@ -54,14 +52,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9C8737782E61FC820062D561 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				9C8737792E61FC9D0062D561 /* logo.png */,
-			);
-			path = Images;
-			sourceTree = "<group>";
-		};
 		9C9287472E60E6B400860481 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,7 +113,6 @@
 			isa = PBXGroup;
 			children = (
 				9C9B58FC2E60AAE4002F515E /* FIB_CloneApp.swift */,
-				9C8737782E61FC820062D561 /* Images */,
 				9C9287492E60E6F100860481 /* Model */,
 				9C9287472E60E6B400860481 /* View */,
 				9C9B59002E60AAE6002F515E /* Assets.xcassets */,
@@ -200,7 +189,6 @@
 			files = (
 				9C9B59042E60AAE6002F515E /* Preview Assets.xcassets in Resources */,
 				9C9B59012E60AAE6002F515E /* Assets.xcassets in Resources */,
-				9C87377A2E61FC9D0062D561 /* logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
