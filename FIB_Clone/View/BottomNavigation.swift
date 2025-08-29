@@ -66,6 +66,10 @@ class BottomNavigation: UITabBarController {
     
     private func createTabViewController(title: String, imageName: String, selectedImageName: String, viewController: UIViewController) -> UINavigationController {
         let navController = UINavigationController(rootViewController: viewController)
+        
+        // Hide navigation bar for cleaner look
+        navController.navigationBar.isHidden = true
+        
         navController.tabBarItem = UITabBarItem(
             title: title,
             image: UIImage(systemName: imageName),
