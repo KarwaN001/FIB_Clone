@@ -32,14 +32,23 @@ class AccountViewController: UIViewController {
     }
     
     private func setupScrollView() {
+        headerView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
+        view.addSubview(headerView)
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            // Header constraints (fixed at top)
+            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            headerView.heightAnchor.constraint(equalToConstant: 60),
+            
+            // ScrollView constraints (below header)
+            scrollView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 20),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -53,9 +62,6 @@ class AccountViewController: UIViewController {
     }
     
     private func setupHeader() {
-        headerView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(headerView)
-        
         // User icon
         let userIconView = UIView()
         userIconView.translatesAutoresizingMaskIntoConstraints = false
@@ -90,11 +96,6 @@ class AccountViewController: UIViewController {
         headerView.addSubview(notificationIconView)
         
         NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            headerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            headerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 60),
-            
             userIconView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 10),
             userIconView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
             userIconView.widthAnchor.constraint(equalToConstant: 70),
@@ -202,7 +203,7 @@ class AccountViewController: UIViewController {
         balanceCardView.addSubview(transactionHistoryButton)
         
         NSLayoutConstraint.activate([
-            balanceCardView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 20),
+            balanceCardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             balanceCardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             balanceCardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             balanceCardView.heightAnchor.constraint(equalToConstant: 165),
