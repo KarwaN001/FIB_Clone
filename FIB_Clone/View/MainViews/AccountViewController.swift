@@ -42,7 +42,7 @@ class AccountViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             // Header constraints (fixed at top)
-            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            headerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             headerView.heightAnchor.constraint(equalToConstant: 60),
