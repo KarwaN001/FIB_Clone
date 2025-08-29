@@ -9,7 +9,7 @@ import UIKit
 import SwiftUI
 import AVFoundation
 
-class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class ScanViewController: UIViewController {
     
     // MARK: - UI Components
     private let titleLabel = UILabel()
@@ -19,26 +19,23 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     private let notWorkingLabel = UILabel()
     private let enterManuallyButton = UIButton()
     
-    // MARK: - Camera Components
-    private var captureSession: AVCaptureSession?
-    private var previewLayer: AVCaptureVideoPreviewLayer?
-    private var cameraDevice: AVCaptureDevice?
-    private var isScanning = false
+    // MARK: - Camera Manager
+    private let cameraManager = QRScannerCameraManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setupCamera()
+        setupCameraManager()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        startScanning()
+        cameraManager.startScanning()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        stopScanning()
+        cameraManager.stopScanning()
     }
     
     private func setupView() {
@@ -49,6 +46,11 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         setupInstructionText()
         setupNotWorkingText()
         setupEnterManuallyButton()
+    }
+    
+    private func setupCameraManager() {
+        cameraManager.delegate = self
+        cameraManager.setupCamera()
     }
     
     private func setupHeader() {
@@ -157,131 +159,6 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         })
     }
     
-    // MARK: - Camera Setup
-    private func setupCamera() {
-        // Check camera authorization status
-        switch AVCaptureDevice.authorizationStatus(for: .video) {
-        case .authorized:
-            // Already authorized, configure session
-            DispatchQueue.main.async {
-                self.configureCaptureSession()
-            }
-        case .notDetermined:
-            // Request permission
-            AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
-                DispatchQueue.main.async {
-                    if granted {
-                        self?.configureCaptureSession()
-                    } else {
-                        self?.showCameraAccessDeniedAlert()
-                    }
-                }
-            }
-        case .denied, .restricted:
-            // Permission denied
-            DispatchQueue.main.async {
-                self.showCameraAccessDeniedAlert()
-            }
-        @unknown default:
-            DispatchQueue.main.async {
-                self.showCameraAccessDeniedAlert()
-            }
-        }
-    }
-    
-    private func configureCaptureSession() {
-        // Ensure we're on the main queue for UI updates
-        guard Thread.isMainThread else {
-            DispatchQueue.main.async {
-                self.configureCaptureSession()
-            }
-            return
-        }
-        
-        captureSession = AVCaptureSession()
-        guard let captureSession = captureSession else { return }
-        
-        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
-            showCameraUnavailableAlert()
-            return
-        }
-        
-        cameraDevice = videoCaptureDevice
-        
-        do {
-            let videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-            
-            if captureSession.canAddInput(videoInput) {
-                captureSession.addInput(videoInput)
-            } else {
-                showCameraUnavailableAlert()
-                return
-            }
-            
-            let metadataOutput = AVCaptureMetadataOutput()
-            
-            if captureSession.canAddOutput(metadataOutput) {
-                captureSession.addOutput(metadataOutput)
-                
-                metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-                metadataOutput.metadataObjectTypes = [.qr]
-            } else {
-                showCameraUnavailableAlert()
-                return
-            }
-            
-            setupPreviewLayer()
-            
-        } catch {
-            showCameraUnavailableAlert()
-        }
-    }
-    
-    private func setupPreviewLayer() {
-        guard let captureSession = captureSession else { return }
-        
-        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        guard let previewLayer = previewLayer else { return }
-        
-        previewLayer.frame = cameraView.bounds
-        previewLayer.videoGravity = .resizeAspectFill
-        previewLayer.cornerRadius = 12
-        
-        // Insert preview layer below the scan line
-        cameraView.layer.insertSublayer(previewLayer, at: 0)
-        
-        // Update preview layer frame after layout
-        DispatchQueue.main.async {
-            previewLayer.frame = self.cameraView.bounds
-        }
-    }
-    
-    private func startScanning() {
-        guard let captureSession = captureSession, !captureSession.isRunning else { return }
-        
-        DispatchQueue.global(qos: .userInitiated).async {
-            captureSession.startRunning()
-            
-            DispatchQueue.main.async {
-                self.isScanning = true
-                // Update preview layer frame
-                if let previewLayer = self.previewLayer {
-                    previewLayer.frame = self.cameraView.bounds
-                }
-            }
-        }
-    }
-    
-    private func stopScanning() {
-        isScanning = false
-        
-        guard let captureSession = captureSession, captureSession.isRunning else { return }
-        
-        DispatchQueue.global(qos: .userInitiated).async {
-            captureSession.stopRunning()
-        }
-    }
-    
     // MARK: - Alert Methods
     private func showCameraAccessDeniedAlert() {
         let alert = UIAlertController(
@@ -314,11 +191,6 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     }
     
     private func handleQRCodeDetected(_ code: String) {
-        // Prevent multiple rapid detections
-        guard isScanning else { return }
-        
-        isScanning = false
-        
         // Provide haptic feedback
         let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
         impactFeedback.impactOccurred()
@@ -331,7 +203,7 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         )
         
         alert.addAction(UIAlertAction(title: "Scan Another", style: .default) { _ in
-            self.isScanning = true
+            self.cameraManager.resumeScanning()
         })
         
         alert.addAction(UIAlertAction(title: "Done", style: .cancel))
@@ -343,9 +215,7 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         super.viewDidLayoutSubviews()
         
         // Update preview layer frame when view layout changes
-        if let previewLayer = previewLayer {
-            previewLayer.frame = cameraView.bounds
-        }
+        cameraManager.updatePreviewLayerFrame(cameraView)
     }
     
     @objc private func enterManuallyTapped() {
@@ -362,14 +232,27 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     }
 }
 
-// MARK: - AVCaptureMetadataOutputObjectsDelegate
-extension ScanViewController {
-    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        guard let metadataObject = metadataObjects.first else { return }
-        guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
-        guard let stringValue = readableObject.stringValue else { return }
-        
-        handleQRCodeDetected(stringValue)
+// MARK: - QRScannerCameraManagerDelegate
+extension ScanViewController: QRScannerCameraManagerDelegate {
+    func cameraManager(_ manager: QRScannerCameraManager, didDetectQRCode code: String) {
+        handleQRCodeDetected(code)
+    }
+    
+    func cameraManagerDidRequestCameraPermission(_ manager: QRScannerCameraManager) {
+        // Handle camera permission request if needed
+    }
+    
+    func cameraManagerCameraAccessDenied(_ manager: QRScannerCameraManager) {
+        showCameraAccessDeniedAlert()
+    }
+    
+    func cameraManagerCameraUnavailable(_ manager: QRScannerCameraManager) {
+        showCameraUnavailableAlert()
+    }
+    
+    func cameraManagerDidConfigureSession(_ manager: QRScannerCameraManager) {
+        // Setup the preview layer once the camera session is configured
+        cameraManager.setupPreviewLayer(in: cameraView)
     }
 }
 
@@ -390,4 +273,4 @@ struct ScanViewController_Previews: PreviewProvider {
         ScanViewControllerRepresentable()
             .edgesIgnoringSafeArea(.all)
     }
-}
+} 

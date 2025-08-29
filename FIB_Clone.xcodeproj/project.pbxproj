@@ -22,6 +22,7 @@
 		9C9B59142E60AC05002F515E /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B59152E60AC05002F515E /* MenuViewController.swift */; };
 		9C9B59162E60AC06002F515E /* ActionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B59172E60AC06002F515E /* ActionItem.swift */; };
 		9C9B59182E60AC07002F515E /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B59192E60AC07002F515E /* HeaderView.swift */; };
+		9C9B591A2E60AC08002F515E /* QRScannerCameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B591B2E60AC08002F515E /* QRScannerCameraManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		9C9B59152E60AC05002F515E /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		9C9B59172E60AC06002F515E /* ActionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionItem.swift; sourceTree = "<group>"; };
 		9C9B59192E60AC07002F515E /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		9C9B591B2E60AC08002F515E /* QRScannerCameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerCameraManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				9C9B590A2E60AB79002F515E /* BottomNavigation.swift */,
 				9C9B58FE2E60AAE4002F515E /* ContentView.swift */,
 				9C9B59192E60AC07002F515E /* HeaderView.swift */,
+				9C9B591B2E60AC08002F515E /* QRScannerCameraManager.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				9C9B59142E60AC05002F515E /* MenuViewController.swift in Sources */,
 				9C9B59162E60AC06002F515E /* ActionItem.swift in Sources */,
 				9C9B59182E60AC07002F515E /* HeaderView.swift in Sources */,
+				9C9B591A2E60AC08002F515E /* QRScannerCameraManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
