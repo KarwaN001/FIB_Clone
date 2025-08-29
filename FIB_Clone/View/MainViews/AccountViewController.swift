@@ -75,7 +75,7 @@ class AccountViewController: UIViewController {
         
         // User name label
         let nameLabel = UILabel()
-        nameLabel.text = "KAEWAN SYBORG"
+        nameLabel.text = "KARWAN SYBORG"
         nameLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         nameLabel.textColor = .label
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
