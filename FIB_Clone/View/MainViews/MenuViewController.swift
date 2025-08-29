@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class MenuViewController: UIViewController {
     override func viewDidLoad() {
@@ -30,5 +31,24 @@ class MenuViewController: UIViewController {
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+} 
+
+// MARK: - SwiftUI Preview
+
+struct MenuViewControllerRepresentable: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> MenuViewController {
+        return MenuViewController()
+    }
+    
+    func updateUIViewController(_ uiViewController: MenuViewController, context: Context) {
+        
+    }
+}
+
+struct MenuViewController_Previews: PreviewProvider {
+    static var previews: some View {
+        MenuViewControllerRepresentable()
+            .edgesIgnoringSafeArea(.all)
     }
 } 
