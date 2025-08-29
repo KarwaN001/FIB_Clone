@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class ScanViewController: UIViewController {
     override func viewDidLoad() {
@@ -14,21 +15,25 @@ class ScanViewController: UIViewController {
     }
     
     private func setupView() {
-        view.backgroundColor = .systemBackground
-        title = "Scan"
         
-        let label = UILabel()
-        label.text = "Scan Screen"
-        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        label.textAlignment = .center
-        label.textColor = .label
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(label)
-        
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
     }
 } 
+
+// MARK: - SwiftUI Preview
+
+struct ScanViewControllerRepresentable: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> ScanViewController {
+        return ScanViewController()
+    }
+    
+    func updateUIViewController(_ uiViewController: ScanViewController, context: Context) {
+        
+    }
+}
+
+struct ScanViewController_Previews: PreviewProvider {
+    static var previews: some View {
+        ScanViewControllerRepresentable()
+            .edgesIgnoringSafeArea(.all)
+    }
+}
