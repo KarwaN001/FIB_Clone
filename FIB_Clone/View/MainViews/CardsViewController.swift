@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class CardsViewController: UIViewController {
     override func viewDidLoad() {
@@ -32,3 +33,22 @@ class CardsViewController: UIViewController {
         ])
     }
 } 
+
+// MARK: - SwiftUI Preview
+
+struct CardsViewControllerRepresentable: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> CardsViewController {
+        return CardsViewController()
+    }
+    
+    func updateUIViewController(_ uiViewController: CardsViewController, context: Context) {
+        
+    }
+}
+
+struct CardsViewController_Previews: PreviewProvider {
+    static var previews: some View {
+        CardsViewControllerRepresentable()
+            .edgesIgnoringSafeArea(.all)
+    }
+}
