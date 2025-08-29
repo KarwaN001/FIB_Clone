@@ -1,5 +1,10 @@
 # SIB (Second Iraqi Bank) 🏦
 
+
+<p align="center">
+  <img src="FIB_Clone/ScreenShots/logo.png" alt="SIB Logo" width="220"/>
+</p>
+
 A modern iOS banking app clone built programmatically with UIKit, inspired by FIB (First Iraqi Bank).
 
 ## ✨ Features
