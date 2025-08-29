@@ -193,7 +193,7 @@ class AccountViewController: UIViewController {
         transactionHistoryButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         transactionHistoryButton.setTitleColor(.white, for: .normal)
         transactionHistoryButton.backgroundColor = UIColor.white.withAlphaComponent(0.2)
-        transactionHistoryButton.layer.cornerRadius = 12
+        transactionHistoryButton.layer.cornerRadius = 22
         transactionHistoryButton.translatesAutoresizingMaskIntoConstraints = false
         
         balanceCardView.addSubview(accountBalanceContainer)
