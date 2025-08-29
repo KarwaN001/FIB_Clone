@@ -10,6 +10,9 @@ import SwiftUI
 
 class CardsViewController: UIViewController {
     
+    // MARK: - ViewModel
+    private let viewModel = CardsViewModel()
+    
     // MARK: - UI Components
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -101,55 +104,45 @@ class CardsViewController: UIViewController {
     }
     
     private func setupCards() {
-        // Blue card
-        let blueCard = createCard(
-            bankName: "SIB BANK",
-            cardNumber: "XXXX    XXXX    XXXX    XXXX ",
-            cardHolderName: "test test",
-            expiryDate: "05/29",
-            cvv: "***",
-            cardType: "VISA",
-            gradientColors: [
-                UIColor(red: 0.2, green: 0.6, blue: 1.0, alpha: 1.0).cgColor,
-                UIColor(red: 0.1, green: 0.4, blue: 0.8, alpha: 1.0).cgColor
-            ],
-            isBlueCard: true
-        )
+        let cards = viewModel.getCards()
+        var constraints: [NSLayoutConstraint] = []
+        var previousCard: UIView? = nil
         
-        // Dark card with pattern
-        let darkCard = createCard(
-            bankName: "SIB BANK",
-            cardNumber: "XXXX    XXXX    XXXX    XXXX ",
-            cardHolderName: "TEST TEST",
-            expiryDate: "05/29",
-            cvv: "***",
-            cardType: "VISA",
-            gradientColors: [
-                UIColor(red: 0.15, green: 0.15, blue: 0.15, alpha: 1.0).cgColor,
-                UIColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 1.0).cgColor
-            ],
-            isBlueCard: false
-        )
-        
-        
-        contentView.addSubview(blueCard)
-        contentView.addSubview(darkCard)
-        
-        cardViews = [blueCard, darkCard]
-        
-        NSLayoutConstraint.activate([
-            // Blue card constraints
-            blueCard.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            blueCard.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            blueCard.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            blueCard.heightAnchor.constraint(equalToConstant: 200),
+        for cardData in cards {
+            let cardView = createCard(from: cardData)
+            contentView.addSubview(cardView)
+            cardViews.append(cardView)
             
-            // Dark card constraints
-            darkCard.topAnchor.constraint(equalTo: blueCard.bottomAnchor, constant: 20),
-            darkCard.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            darkCard.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            darkCard.heightAnchor.constraint(equalToConstant: 200)
-        ])
+            // Set up constraints for each card
+            constraints.append(contentsOf: [
+                cardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+                cardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+                cardView.heightAnchor.constraint(equalToConstant: 200)
+            ])
+            
+            if let previous = previousCard {
+                constraints.append(cardView.topAnchor.constraint(equalTo: previous.bottomAnchor, constant: 20))
+            } else {
+                constraints.append(cardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20))
+            }
+            
+            previousCard = cardView
+        }
+        
+        NSLayoutConstraint.activate(constraints)
+    }
+    
+    private func createCard(from cardData: Card) -> UIView {
+        return createCard(
+            bankName: cardData.bankName,
+            cardNumber: cardData.cardNumber,
+            cardHolderName: cardData.cardHolderName,
+            expiryDate: cardData.expiryDate,
+            cvv: cardData.cvv,
+            cardType: cardData.cardType,
+            gradientColors: cardData.gradientColors,
+            isBlueCard: cardData.isBlueCard
+        )
     }
     
     private func createCard(
@@ -319,10 +312,20 @@ class CardsViewController: UIViewController {
         let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
         impactFeedback.impactOccurred()
         
-        // Show alert for now (you can implement actual functionality later)
-        let alert = UIAlertController(title: "Get New Card", message: "test test test", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        // Check if user can add new card
+        if viewModel.canAddNewCard() {
+            // Delegate logic to ViewModel
+            // viewModel.addNewCard()
+            
+            // Show alert for now (you can implement actual functionality later)
+            let alert = UIAlertController(
+                title: "test test test", 
+                message: " cards: \(viewModel.getCardCount())", 
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+        } 
     }
 }
 
