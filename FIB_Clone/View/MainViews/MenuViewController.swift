@@ -21,7 +21,7 @@ class MenuViewController: UIViewController {
     }
     
     private func setupView() {
-        view.backgroundColor = .systemBackground   
+        view.backgroundColor = .systemGray6
         
         setupHeader()
         setupScrollView()
