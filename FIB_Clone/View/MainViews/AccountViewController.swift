@@ -13,7 +13,7 @@ class AccountViewController: UIViewController {
     // MARK: - UI Components
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    private let headerView = UIView()
+    private let headerView = HeaderView()
     private let balanceCardView = UIView()
     private let actionsContainerView = UIView()
     
@@ -26,7 +26,7 @@ class AccountViewController: UIViewController {
         //view.backgroundColor = UIColor.systemGray6
         
         setupScrollView()
-        setupHeader()
+        setupHeaderActions()
         setupBalanceCard()
         setupActionButtons()
     }
@@ -61,64 +61,17 @@ class AccountViewController: UIViewController {
         ])
     }
     
-    private func setupHeader() {
-        // User icon
-        let userIconView = UIView()
-        userIconView.translatesAutoresizingMaskIntoConstraints = false
+    private func setupHeaderActions() {
+        // Set up header action callbacks
+        headerView.onUserIconTapped = { [weak self] in
+            // Handle user icon tap
+            print("User icon tapped")
+        }
         
-        let userIcon = UIImageView()
-        userIcon.image = UIImage(systemName: "person.fill")
-        userIcon.tintColor = .systemGray
-        userIcon.translatesAutoresizingMaskIntoConstraints = false
-        
-        userIconView.addSubview(userIcon)
-        
-        // User name label
-        let nameLabel = UILabel()
-        nameLabel.text = "KARWAN SYBORG"
-        nameLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        nameLabel.textColor = .label
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        // Notification icon
-        let notificationIconView = UIView()
-        notificationIconView.translatesAutoresizingMaskIntoConstraints = false
-        
-        let notificationIcon = UIImageView()
-        notificationIcon.image = UIImage(systemName: "bell.fill")
-        notificationIcon.tintColor = .systemGray
-        notificationIcon.translatesAutoresizingMaskIntoConstraints = false
-        
-        notificationIconView.addSubview(notificationIcon)
-        
-        headerView.addSubview(userIconView)
-        headerView.addSubview(nameLabel)
-        headerView.addSubview(notificationIconView)
-        
-        NSLayoutConstraint.activate([
-            userIconView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 10),
-            userIconView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-            userIconView.widthAnchor.constraint(equalToConstant: 70),
-            userIconView.heightAnchor.constraint(equalToConstant: 70),
-            
-            userIcon.centerXAnchor.constraint(equalTo: userIconView.centerXAnchor),
-            userIcon.centerYAnchor.constraint(equalTo: userIconView.centerYAnchor),
-            userIcon.widthAnchor.constraint(equalToConstant: 20),
-            userIcon.heightAnchor.constraint(equalToConstant: 20),
-            
-            nameLabel.leadingAnchor.constraint(equalTo: userIconView.trailingAnchor, constant: 8),
-            nameLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-            
-            notificationIconView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -10),
-            notificationIconView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-            notificationIconView.widthAnchor.constraint(equalToConstant: 70),
-            notificationIconView.heightAnchor.constraint(equalToConstant: 70),
-            
-            notificationIcon.centerXAnchor.constraint(equalTo: notificationIconView.centerXAnchor),
-            notificationIcon.centerYAnchor.constraint(equalTo: notificationIconView.centerYAnchor),
-            notificationIcon.widthAnchor.constraint(equalToConstant: 20),
-            notificationIcon.heightAnchor.constraint(equalToConstant: 20)
-        ])
+        headerView.onNotificationTapped = { [weak self] in
+            // Handle notification icon tap
+            print("Notification icon tapped")
+        }
     }
     
     private func setupBalanceCard() {
